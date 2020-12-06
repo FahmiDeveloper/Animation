@@ -1,6 +1,6 @@
-import { animate, state, style, transition, trigger } from '@angular/animations';
+import { animate, state, style, transition, trigger, useAnimation } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
-import { slide } from '../animations';
+import { bounceOutLeftAnimation, slide } from '../animations';
 
 @Component({
   selector: 'app-todos',
@@ -8,10 +8,19 @@ import { slide } from '../animations';
   styleUrls: ['./todos.component.scss'],
   animations: [
 
-    slide //use one file for animation
+    trigger('todoAnimation', [
+       transition(':enter', [
+       style({opacity:0}),
+       animate(2000)
+      ]),
+      transition(':leave', [
+        style({backgroundColor: 'red'}),
+        animate(1000),
+        useAnimation(bounceOutLeftAnimation)
+      ]),
+    ])
 
-
-
+    //slide //use one file for animation
 
     // trigger('fade', [
 
