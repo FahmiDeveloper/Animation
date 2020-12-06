@@ -9,3 +9,16 @@ export let fade =  trigger('fade', [
     ]),
 
 ])
+
+export let slide =  trigger('slide', [
+
+    transition(':enter', [
+      style({transform: 'translateX(-10px)'}),
+      animate(500)
+    ]),
+
+    transition(':leave', [
+      animate('0.5s cubic-bezier(.61, .29, .07, 1.02)', style({transform: 'translateX(-100%)'}))
+    ])
+
+]);

@@ -1,6 +1,6 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
-import { fade } from '../animations';
+import { slide } from '../animations';
 
 @Component({
   selector: 'app-todos',
@@ -8,10 +8,10 @@ import { fade } from '../animations';
   styleUrls: ['./todos.component.scss'],
   animations: [
 
-    fade //use one file for animation
+    slide //use one file for animation
 
 
-    
+
 
     // trigger('fade', [
 
