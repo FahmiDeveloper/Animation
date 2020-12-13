@@ -1,6 +1,6 @@
 import { animate, state, style, transition, trigger, useAnimation } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
-import { bounceOutLeftAnimation, slide } from '../animations';
+import { bounceOutLeftAnimation, fadeInAnimation, slide } from '../animations';
 
 @Component({
   selector: 'app-todos',
@@ -8,17 +8,35 @@ import { bounceOutLeftAnimation, slide } from '../animations';
   styleUrls: ['./todos.component.scss'],
   animations: [
 
+    //Parameterizing Reusable Animations
     trigger('todoAnimation', [
-       transition(':enter', [
-       style({opacity:0}),
-       animate(2000)
-      ]),
-      transition(':leave', [
-        style({backgroundColor: 'red'}),
-        animate(1000),
-        useAnimation(bounceOutLeftAnimation)
-      ]),
-    ])
+      transition(':enter', [
+      useAnimation(fadeInAnimation, {
+        params:{
+          duration: '500ms'
+        }
+      })
+     ]),
+     transition(':leave', [
+       style({backgroundColor: 'red'}),
+       animate(1000),
+       useAnimation(bounceOutLeftAnimation)
+     ]),
+   ])
+
+
+   //Creating Reusable Animations with animation() 
+  //  trigger('todoAnimation', [
+  //      transition(':enter', [
+  //      style({opacity:0}),
+  //      animate(2000)
+  //     ]),
+  //     transition(':leave', [
+  //       style({backgroundColor: 'red'}),
+  //       animate(1000),
+  //       useAnimation(bounceOutLeftAnimation)
+  //     ]),
+  //   ])
 
     //slide //use one file for animation
 
