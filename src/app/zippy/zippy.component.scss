@@ -1,0 +1,25 @@
+@import "~bootstrap/dist/css/bootstrap.css";
+.zippy {
+    border: 1px solid #ccc;
+    border-radius: 2px;
+    margin-left: 350px;
+    
+  }
+  
+  .zippy-heading {
+    font-weight: bold;
+    padding: 20px;
+    cursor: pointer;
+  }
+  
+  .zippy-body{
+    padding: 20px;
+  }
+  
+  .expanded {
+    background: #f0f0f0;
+  }
+  
+  .glyphicon {
+    float: right;
+  }
