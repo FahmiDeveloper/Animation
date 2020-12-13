@@ -90,4 +90,8 @@ export class TodosComponent {
     this.items.splice(item, 1);
   }
 
+  //Animation callback
+  animationStarted($event){console.log($event)}
+  animationDone($event){console.log($event)}
+
 }

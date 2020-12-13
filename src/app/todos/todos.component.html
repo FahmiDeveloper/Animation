@@ -9,6 +9,8 @@
         <button 
         type="button"
         @todoAnimation
+        (@todoAnimation.start)="animationStarted($event)"
+        (@todoAnimation.done)="animationDone($event)"
         *ngFor="let item of items"
         (click)="remove(item)"
         class="list-group-item">
@@ -17,3 +19,4 @@
     </div>
 </div>
 
+<!--(@todoAnimation.start) and (@todoAnimation.done) for Animation callback-->
