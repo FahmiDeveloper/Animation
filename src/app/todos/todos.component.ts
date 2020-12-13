@@ -1,4 +1,4 @@
-import { animate, animateChild, query, state, style, transition, trigger, useAnimation } from '@angular/animations';
+import { animate, animateChild, group, query, stagger, state, style, transition, trigger, useAnimation } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { bounceOutLeftAnimation, fadeInAnimation, slide } from '../animations';
 
@@ -11,11 +11,15 @@ import { bounceOutLeftAnimation, fadeInAnimation, slide } from '../animations';
     //Querying Child Elements with query() and animating Child Elements with animateChild()
     trigger('todosAnimation', [
       transition(':enter', [
-      query('h2', [
-        style({transform:'translateY(-20px)'}),
-        animate(1000)
-      ]),
-      query('@todoAnimation', animateChild())
+      group([ // to solve problem of run animation on sequence
+        query('h2', [
+          style({transform:'translateY(-20px)'}),
+          animate(1000)
+        ]),
+        // query('@todoAnimation', animateChild()),
+        query('@todoAnimation', stagger(200, animateChild()) // using stagger function shoukd be with query function
+        )
+      ])
      ])
    ]),
 
