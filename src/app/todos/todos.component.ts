@@ -1,6 +1,6 @@
-import { animate, state, style, transition, trigger, useAnimation } from '@angular/animations';
+import { animate, animateChild, group, query, stagger, state, style, transition, trigger, useAnimation } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
-import { bounceOutLeftAnimation, slide } from '../animations';
+import { bounceOutLeftAnimation, fadeInAnimation, slide } from '../animations';
 
 @Component({
   selector: 'app-todos',
@@ -8,17 +8,50 @@ import { bounceOutLeftAnimation, slide } from '../animations';
   styleUrls: ['./todos.component.scss'],
   animations: [
 
+    //Querying Child Elements with query() and animating Child Elements with animateChild()
+    trigger('todosAnimation', [
+      transition(':enter', [
+      group([ // to solve problem of run animation on sequence
+        query('h2', [
+          style({transform:'translateY(-20px)'}),
+          animate(1000)
+        ]),
+        // query('@todoAnimation', animateChild()),
+        query('@todoAnimation', stagger(200, animateChild()) // using stagger function shoukd be with query function
+        )
+      ])
+     ])
+   ]),
+
+    //Parameterizing Reusable Animations
     trigger('todoAnimation', [
-       transition(':enter', [
-       style({opacity:0}),
-       animate(2000)
-      ]),
-      transition(':leave', [
-        style({backgroundColor: 'red'}),
-        animate(1000),
-        useAnimation(bounceOutLeftAnimation)
-      ]),
-    ])
+      transition(':enter', [
+      useAnimation(fadeInAnimation, {
+        params:{
+          duration: '500ms'
+        }
+      })
+     ]),
+     transition(':leave', [
+       style({backgroundColor: 'red'}),
+       animate(1000),
+       useAnimation(bounceOutLeftAnimation)
+     ]),
+   ])
+
+
+   //Creating Reusable Animations with animation() 
+  //  trigger('todoAnimation', [
+  //      transition(':enter', [
+  //      style({opacity:0}),
+  //      animate(2000)
+  //     ]),
+  //     transition(':leave', [
+  //       style({backgroundColor: 'red'}),
+  //       animate(1000),
+  //       useAnimation(bounceOutLeftAnimation)
+  //     ]),
+  //   ])
 
     //slide //use one file for animation
 
@@ -71,5 +104,9 @@ export class TodosComponent {
   remove(item){
     this.items.splice(item, 1);
   }
+
+  //Animation callback
+  animationStarted($event){console.log($event)}
+  animationDone($event){console.log($event)}
 
 }
