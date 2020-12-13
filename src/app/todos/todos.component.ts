@@ -1,4 +1,4 @@
-import { animate, state, style, transition, trigger, useAnimation } from '@angular/animations';
+import { animate, animateChild, query, state, style, transition, trigger, useAnimation } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { bounceOutLeftAnimation, fadeInAnimation, slide } from '../animations';
 
@@ -7,6 +7,17 @@ import { bounceOutLeftAnimation, fadeInAnimation, slide } from '../animations';
   templateUrl: './todos.component.html',
   styleUrls: ['./todos.component.scss'],
   animations: [
+
+    //Querying Child Elements with query() and animating Child Elements with animateChild()
+    trigger('todosAnimation', [
+      transition(':enter', [
+      query('h2', [
+        style({transform:'translateY(-20px)'}),
+        animate(1000)
+      ]),
+      query('@todoAnimation', animateChild())
+     ])
+   ]),
 
     //Parameterizing Reusable Animations
     trigger('todoAnimation', [
